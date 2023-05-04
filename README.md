@@ -1,1 +1,1 @@
-# university-sistem
+# university-system
