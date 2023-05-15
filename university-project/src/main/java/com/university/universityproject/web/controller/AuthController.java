@@ -1,4 +1,4 @@
-package com.university.universityproject.web.conteroller;
+package com.university.universityproject.web.controller;
 
 import com.university.universityproject.dto.UserLoginForm;
 import com.university.universityproject.dto.UserRegisterForm;

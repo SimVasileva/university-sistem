@@ -1,4 +1,4 @@
-package com.university.universityproject.web.conteroller;
+package com.university.universityproject.web.controller;
 
 import org.springframework.web.servlet.ModelAndView;
 
