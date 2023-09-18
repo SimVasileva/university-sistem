@@ -1,33 +1,30 @@
 spring:
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    url: "jdbc:mariadb://localhost:3306/universiryDb?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    url: "jdbc:mariadb://localhost:3306/universityDb?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: root
     password: admin
-  servlet:
-    multipart:
-      max-file-size: 1MB
-      max-request-size: 5MB
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
   sql:
     init:
-      mode: never
+      mode: always
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-  #Cloudinary Properties cloud
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .html
+app:
+  default:
+    password: topsecret
 server:
   port: 8000
