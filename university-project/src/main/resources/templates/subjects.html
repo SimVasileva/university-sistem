@@ -19,15 +19,13 @@
     </tr>
     </thead>
     <tbody>
-<!--    <tr th:each="subject : ${subjects}">-->
-<!--        <td th:text="${subject.name}"></td>-->
-<!--    </tr>-->
-<!--    <tr th:each="subject : ${subjects}">-->
-<!--        <td><span th:if="${subject.passed}">&#10003;</span>-->
-<!--            <span th:unless="${subject.passed}">&#10007;</span></td>-->
-<!--    </tr>-->
-<tr><td>Math</td><td>&#10007;</td></tr>
-<tr><td>Physics</td><td>&#10003;</td></tr>
+    <tr th:each="subject : ${subjects}">
+        <td th:text="${subject.name}"></td>
+    </tr>
+    <tr th:each="subject : ${subjects}">
+        <td><span th:if="${subject.passed}">&#10003;</span>
+            <span th:unless="${subject.passed}">&#10007;</span></td>
+    </tr>
     </tbody>
 </table>
 </body>
