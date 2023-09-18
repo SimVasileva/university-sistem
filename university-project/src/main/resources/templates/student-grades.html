@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grades</title>
+  <link rel="stylesheet" href="/css/view-grades.css">
+</head>
+<body>
+<header>
+  <nav th:replace="~{/fragments/header}"></nav>
+</header>
+<h1>Grades for <span th:text="${student.firstName + ' ' + student.lastName}"></span></h1>
+<table th:action="@{/students/grades}" th:method="post">
+  <thead>
+  <tr>
+    <th>Subject</th>
+    <th>Grade</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="subject : ${subjects}">
+    <td th:text="${subject.name}"></td>
+  </tr>
+  <tr th:each="subject : ${subjects}">
+    <td th:text="${subject.grade.grade}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

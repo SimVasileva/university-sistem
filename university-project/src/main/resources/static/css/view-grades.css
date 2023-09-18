@@ -1,0 +1,42 @@
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 14px; /* Smaller font size */
+}
+
+/* Style table headers */
+th {
+    background-color: #007bff; /* Blue header background */
+    color: #fff; /* White text color */
+    font-weight: bold;
+    padding: 8px; /* Smaller padding */
+    text-align: left;
+}
+
+/* Style table rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray alternating rows */
+}
+
+/* Style table cells */
+td {
+    padding: 8px; /* Smaller padding */
+    border: 1px solid #ddd; /* Light gray border */
+    text-align: left;
+}
+
+/* Hover effect on table rows */
+tr:hover {
+    background-color: #ddd; /* Gray on hover */
+}
+table td span::before {
+    content: "\2713"; /* Tick icon */
+    color: green;
+}
+table td span:empty::before {
+    content: "\2717"; /* Cross icon for empty spans */
+    color: red;
+}

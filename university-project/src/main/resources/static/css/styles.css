@@ -1,0 +1,46 @@
+.main-header {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Style the logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Style the navigation menu */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav li {
+    font-size: 18px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: #00a2ff;
+}

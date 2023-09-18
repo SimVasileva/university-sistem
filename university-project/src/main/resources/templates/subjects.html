@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+      <link rel="stylesheet" href="/css/view-grades.css">
+</head>
+<body>
+<header>
+    <nav th:replace="~{/fragments/header}"></nav>
+</header>
+<h1>Subjects for <span th:text="${student.firstName + ' ' + student.lastName}"></span></h1>
+
+<table th:action="@{/students/subjects}" th:method="post">
+    <thead>
+    <tr>
+        <th>Subject</th>
+        <th>Passed</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr th:each="subject : ${subjects}">-->
+<!--        <td th:text="${subject.name}"></td>-->
+<!--    </tr>-->
+<!--    <tr th:each="subject : ${subjects}">-->
+<!--        <td><span th:if="${subject.passed}">&#10003;</span>-->
+<!--            <span th:unless="${subject.passed}">&#10007;</span></td>-->
+<!--    </tr>-->
+<tr><td>Math</td><td>&#10007;</td></tr>
+<tr><td>Physics</td><td>&#10003;</td></tr>
+    </tbody>
+</table>
+</body>
+</html>

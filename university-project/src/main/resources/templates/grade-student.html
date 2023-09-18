@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/grade.css">
+    <title>Grade Student</title>
+</head>
+<body>
+<header>
+    <nav th:replace="~{/fragments/header}"></nav>
+</header>
+<br>
+<div class="container">
+    <h1>Grade Student</h1>
+    <form th:action="@{/teachers/grade}" th:method="post">
+
+        <div class="form-group">
+            <label th:for="facultyNumber">Student Faculty Number</label>
+            <input type="text" id="facultyNumber" name="facultyNumber">
+        </div>
+        <div class="form-group">
+            <label th:for="subject">Subject</label>
+            <input type="text" id="subject" name="subject">
+        </div>
+        <div class="form-group">
+            <label for="grade">Grade</label>
+            <input type="number" id="grade" name="grade" min="2" max="6">
+        </div>
+        <!-- Add more criteria as needed -->
+        <button type="submit">Submit Grade</button>
+    </form>
+</div>
+
+</body>
+</html>
