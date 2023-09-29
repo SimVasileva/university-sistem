@@ -8,7 +8,8 @@ spring:
     init:
       mode: always
   jpa:
-    database-platform: org.hibernate.dialect.MariaDBDialect
+    database-platform:
+      dialect: org.hibernate.dialect.MariaDBDialect
     hibernate:
       ddl-auto: create-drop
     open-in-view: false

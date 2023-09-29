@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface SpecialityRepository extends JpaRepository<SpecialityEntity,Long> {
-    @Override
-    Optional<SpecialityEntity> findById(Long id);
     Optional<SpecialityEntity> findByName(String name);
 }

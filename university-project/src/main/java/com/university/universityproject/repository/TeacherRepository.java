@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
-    @Override
-    Optional<TeacherEntity> findById(Long id);
 
     List<TeacherEntity> findAllByFirstName(String firstName);
 
