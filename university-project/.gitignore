@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+/.idea/dataSources
+/.idea/sonarlint
 
 ### NetBeans ###
 /nbproject/private/
