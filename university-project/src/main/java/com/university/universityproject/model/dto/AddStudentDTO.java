@@ -1,8 +1,5 @@
 package com.university.universityproject.model.dto;
 
-import com.university.universityproject.model.FacultyEntity;
-import com.university.universityproject.model.SpecialityEntity;
-
 import lombok.Getter;
 
 @Getter
@@ -14,7 +11,7 @@ public class AddStudentDTO {
     private String facultyNumber;
     private String faculty;
     private String speciality;
-
+    private String group;
 
     public AddStudentDTO setFirstName(String firstName) {
         this.firstName = firstName;
@@ -48,6 +45,11 @@ public class AddStudentDTO {
 
     public AddStudentDTO setSpeciality(String speciality) {
         this.speciality = speciality;
+        return this;
+    }
+
+    public AddStudentDTO setGroup(String group) {
+        this.group = group;
         return this;
     }
 }

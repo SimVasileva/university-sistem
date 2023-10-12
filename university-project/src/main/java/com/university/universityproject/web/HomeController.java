@@ -23,8 +23,8 @@ public class HomeController {
     public String getHome(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName(); // Get the username
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("User not found "+email));
-        model.addAttribute("user",user);
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
+        model.addAttribute("user", user);
         return "index";
     }
 }

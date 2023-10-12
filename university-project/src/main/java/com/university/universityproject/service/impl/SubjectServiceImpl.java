@@ -25,7 +25,8 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void createSubject(String facultyNumber, String subject, boolean passed) {
         Optional<StudentEntity> studentOpt = studentRepository.findByFacultyNumber(facultyNumber);
-        if (studentOpt.isPresent()){
+
+        if (studentOpt.isPresent()) {
             StudentEntity student = studentOpt.get();
             SubjectEntity subjectEntity = new SubjectEntity().setName(subject).setPassed(passed).setStudent(student);
             subjectRepository.save(subjectEntity);

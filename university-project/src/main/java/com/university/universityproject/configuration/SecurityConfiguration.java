@@ -23,33 +23,33 @@ public class SecurityConfiguration {
         // http exposes api that allows us to configure the web security
         http.
                 // which pages will be authorized?
-                        authorizeHttpRequests().
+                        authorizeHttpRequests()
                 // allow CSS at "common" static location (static/css)
-                        requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 // permit home page, login and registration pages for anyone
-                        requestMatchers("/", "/users/home").permitAll().
+                .requestMatchers("/", "/users/home").permitAll()
                 // allow for Student
-                        requestMatchers("/students/**").hasAnyRole("ADMIN","STUDENT").
+                .requestMatchers("/students/**").hasAnyRole("ADMIN", "STUDENT")
                 // allow for Teachers
-                        requestMatchers("/teachers/**").hasAnyRole("ADMIN","TEACHER").
+                .requestMatchers("/teachers/**").hasAnyRole("ADMIN", "TEACHER")
                 // allow for Admins
-                        requestMatchers("/teachers/**", "/students/**", "/users/**").hasRole(UserRoleEnum.ADMIN.name()).
+                .requestMatchers("/teachers/**", "/students/**", "/users/**").hasRole(UserRoleEnum.ADMIN.name())
                 // any remaining reqests should be authenticated
-                        anyRequest().
-                authenticated().
-                and().
-                formLogin().
-                loginPage("/").
-                usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
-                passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-                defaultSuccessUrl("/home").
-                failureForwardUrl("/login-error").
-                and().
-                logout().
-                logoutUrl("/logout").
-                logoutSuccessUrl("/").
-                invalidateHttpSession(true).
-                deleteCookies("JSESSIONID")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/")
+                .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+                .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
+                .defaultSuccessUrl("/home")
+                .failureForwardUrl("/login-error")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .and()
                 .csrf().disable();
 

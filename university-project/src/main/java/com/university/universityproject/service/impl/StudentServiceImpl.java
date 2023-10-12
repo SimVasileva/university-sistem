@@ -47,21 +47,21 @@ public class StudentServiceImpl implements StudentService {
     public void createStudent(AddStudentDTO addStudentDTO) {
         SpecialityEntity speciality;
         FacultyEntity faculty;
-       Optional<SpecialityEntity> specialityOpt = specialityRepository.findByName(addStudentDTO.getSpeciality());
-       if(specialityOpt.isEmpty()){
+        Optional<SpecialityEntity> specialityOpt = specialityRepository.findByName(addStudentDTO.getSpeciality());
+        if (specialityOpt.isEmpty()) {
             speciality = new SpecialityEntity().setName(addStudentDTO.getSpeciality());
-           specialityRepository.save(speciality);
-       }else {
-           speciality = specialityOpt.get();
-       }
+            specialityRepository.save(speciality);
+        } else {
+            speciality = specialityOpt.get();
+        }
 
-       Optional<FacultyEntity> facultyOpt = facultyRepository.findByName(addStudentDTO.getFaculty());
-       if(facultyOpt.isEmpty()){
+        Optional<FacultyEntity> facultyOpt = facultyRepository.findByName(addStudentDTO.getFaculty());
+        if (facultyOpt.isEmpty()) {
             faculty = new FacultyEntity().setName(addStudentDTO.getFaculty());
-           facultyRepository.save(faculty);
-       }else{
-           faculty = facultyOpt.get();
-       }
+            facultyRepository.save(faculty);
+        } else {
+            faculty = facultyOpt.get();
+        }
         UserRoleEntity
                 studentRole = userRoleRepository.findByRole(STUDENT).orElseThrow(NullPointerException::new);
 

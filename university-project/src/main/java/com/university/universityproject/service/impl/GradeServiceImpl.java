@@ -31,9 +31,11 @@ public class GradeServiceImpl implements GradeService {
         if (studentOpt.isPresent()) {
             StudentEntity student = studentOpt.get();
             Optional<SubjectEntity> subjectOpt = subjectRepository.findByNameAndStudentId(subject, student.getId());
+
             SubjectEntity subjectEntity = subjectOpt.get();
             GradeEntity gradeEntity = new GradeEntity().setGrade(grade).setStudent(student).setSubject(subjectEntity);
             subjectEntity.setGrade(gradeEntity);
+
             subjectRepository.save(subjectEntity);
             gradeRepository.save(gradeEntity);
         } else {

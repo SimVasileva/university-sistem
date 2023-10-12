@@ -22,6 +22,7 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final GradeService gradeService;
     private final SubjectService subjectService;
+    private static final String TEACHERS = "teachers";
 
     public TeacherController(TeacherService teacherService, GradeService gradeService, SubjectService subjectService) {
         this.teacherService = teacherService;
@@ -41,8 +42,8 @@ public class TeacherController {
     }
 
     @GetMapping
-    public String getTeachers(Model model, @ModelAttribute("searchIdForm") SearchForm searchForm) {
-        return "teachers";
+    public String getTeachers(@ModelAttribute("searchIdForm") SearchForm searchForm) {
+        return TEACHERS;
     }
 
     @PostMapping
@@ -51,8 +52,8 @@ public class TeacherController {
         String firstName = fullName[0];
         String lastName = fullName[1];
         List<TeacherEntity> teachers = teacherService.viewTeachers(firstName, lastName);
-        model.addAttribute("teachers", teachers);
-        return "teachers";
+        model.addAttribute(TEACHERS, teachers);
+        return TEACHERS;
     }
 
     @GetMapping("/grade")

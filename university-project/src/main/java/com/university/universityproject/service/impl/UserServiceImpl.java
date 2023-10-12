@@ -77,38 +77,39 @@ public class UserServiceImpl implements UserService {
     public void initUsers() {
         if (userRepository.count() == 0) {
 
-            UserEntity adminUser = new UserEntity().
-                    setFirstName("Admin").
-                    setLastName("Adminov").
-                    setEmail("admin@example.com").
-                    setPassword(passwordEncoder.encode(defaultPassword)).
-                    setRoles(userRoleRepository.findAll());
+            UserEntity adminUser = new UserEntity()
+                    .setFirstName("Admin")
+                    .setLastName("Adminov")
+                    .setEmail("admin@example.com")
+                    .setPassword(passwordEncoder.encode(defaultPassword))
+                    .setRoles(userRoleRepository.findAll());
 
-            UserRoleEntity teacherRole = userRoleRepository.findByRole(TEACHER).
-                    orElseThrow(() -> new IllegalStateException("Roles are not initialized properly."));
+            UserRoleEntity teacherRole = userRoleRepository.findByRole(TEACHER)
+                    .orElseThrow(() -> new IllegalStateException("Roles are not initialized properly."));
 
-            UserEntity teacherUser = new UserEntity().
-                    setFirstName("Teacher").
-                    setLastName("Teacher").
-                    setEmail("teacher@example.com").
-                    setPassword(passwordEncoder.encode(defaultPassword)).
-                    setRoles(List.of(teacherRole));
+            UserEntity teacherUser = new UserEntity()
+                    .setFirstName("Teacher")
+                    .setLastName("Teacher")
+                    .setEmail("teacher@example.com")
+                    .setPassword(passwordEncoder.encode(defaultPassword))
+                    .setRoles(List.of(teacherRole));
 
             FacultyEntity faculty = new FacultyEntity().setName("FTK");
             facultyRepository.save(faculty);
-            SpecialityEntity speciality = new SpecialityEntity().setName("Telecommunications");
+
+            SpecialityEntity speciality = new SpecialityEntity().setName("Example Speciality");
             specialityRepository.save(speciality);
 
 
-            UserRoleEntity studentRole = userRoleRepository.findByRole(STUDENT).
-                    orElseThrow(() -> new IllegalStateException("Roles are not initialized properly."));
+            UserRoleEntity studentRole = userRoleRepository.findByRole(STUDENT)
+                    .orElseThrow(() -> new IllegalStateException("Roles are not initialized properly."));
 
-            UserEntity studentUser = new UserEntity().
-                    setFirstName("Student").
-                    setLastName("Student").
-                    setEmail("student@example.com").
-                    setPassword(passwordEncoder.encode(defaultPassword)).
-                    setRoles(List.of(studentRole));
+            UserEntity studentUser = new UserEntity()
+                    .setFirstName("Student")
+                    .setLastName("Student")
+                    .setEmail("student@example.com")
+                    .setPassword(passwordEncoder.encode(defaultPassword))
+                    .setRoles(List.of(studentRole));
 
 
             userRepository.saveAll(List.of(adminUser, teacherUser, studentUser));
@@ -119,7 +120,8 @@ public class UserServiceImpl implements UserService {
                     .setUser(studentUser)
                     .setFacultyNumber("111111111")
                     .setSpeciality(speciality)
-                    .setFaculty(faculty);
+                    .setFaculty(faculty)
+                    .setGroup("1");
 
             TeacherEntity teacher = new TeacherEntity()
                     .setFirstName(teacherUser.getFirstName())
@@ -138,11 +140,11 @@ public class UserServiceImpl implements UserService {
     public void createAccount(UserRegistrationDTO userRegistrationDTO) {
 
         UserEntity userEntity = new UserEntity();
-        userEntity.
-                setFirstName(userRegistrationDTO.getFirstName()).
-                setLastName(userRegistrationDTO.getLastName()).
-                setEmail(userRegistrationDTO.getEmail()).
-                setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        userEntity
+                .setFirstName(userRegistrationDTO.getFirstName())
+                .setLastName(userRegistrationDTO.getLastName())
+                .setEmail(userRegistrationDTO.getEmail())
+                .setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         userRepository.save(userEntity);
 
         var userDetails = userDetailsService.loadUserByUsername(userRegistrationDTO.getEmail());
@@ -152,9 +154,9 @@ public class UserServiceImpl implements UserService {
                 userDetails.getAuthorities()
         );
 
-        SecurityContextHolder.
-                getContext().
-                setAuthentication(authentication);
+        SecurityContextHolder
+                .getContext()
+                .setAuthentication(authentication);
     }
 
 }

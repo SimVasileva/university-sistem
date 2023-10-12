@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.university.universityproject.model.UserRoleEnum.TEACHER;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private final UserRoleRepository userRoleRepository;
@@ -65,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<TeacherEntity> viewTeachers(String firstName,String lastName) {
+    public List<TeacherEntity> viewTeachers(String firstName, String lastName) {
         return teacherRepository.findAllByFirstNameAndAndLastName(firstName, lastName);
     }
 }

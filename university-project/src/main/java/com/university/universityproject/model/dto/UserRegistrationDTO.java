@@ -62,7 +62,7 @@ public class UserRegistrationDTO {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password != null ? "[PROVIDED]" : "[null]" + '\'' +
-                ", confirmPassword='" + confirmPassword != null ? "[PROVIDED]" : "[null]"+ '\'' +
+                ", confirmPassword='" + confirmPassword != null ? "[PROVIDED]" : "[null]" + '\'' +
                 '}';
     }
 }
