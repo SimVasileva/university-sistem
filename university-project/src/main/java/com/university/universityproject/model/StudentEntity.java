@@ -24,7 +24,7 @@ public class StudentEntity {
     @Column
     private String facultyNumber;
     @Column
-    private String group;
+    private String grupa;
     @ManyToOne
     @JoinColumn(name = "specialty_id")
     private SpecialityEntity speciality;
@@ -61,8 +61,8 @@ public class StudentEntity {
         return this;
     }
 
-    public StudentEntity setGroup(String group) {
-        this.group = group;
+    public StudentEntity setGrupa(String grupa) {
+        this.grupa = grupa;
         return this;
     }
 

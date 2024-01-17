@@ -1,7 +1,5 @@
 package com.university.universityproject.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import com.university.universityproject.model.FacultyEntity;
@@ -121,7 +119,7 @@ public class UserServiceImpl implements UserService {
                     .setFacultyNumber("111111111")
                     .setSpeciality(speciality)
                     .setFaculty(faculty)
-                    .setGroup("1");
+                    .setGrupa("1");
 
             TeacherEntity teacher = new TeacherEntity()
                     .setFirstName(teacherUser.getFirstName())
