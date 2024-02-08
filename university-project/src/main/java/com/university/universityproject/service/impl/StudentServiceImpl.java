@@ -81,6 +81,7 @@ public class StudentServiceImpl implements StudentService {
                 .setFacultyNumber(addStudentDTO.getFacultyNumber())
                 .setSpeciality(speciality)
                 .setFaculty(faculty)
+                .setGrupa(addStudentDTO.getGrupa())
                 .setUser(userEntity);
 
         studentRepository.save(student);

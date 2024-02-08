@@ -26,6 +26,6 @@ spring:
       suffix: .html
 app:
   default:
-    password: topsecret
+    password: password
 server:
   port: 8000

@@ -57,10 +57,12 @@ public class TeacherServiceImpl implements TeacherService {
         userRepository.save(userEntity);
 
         TeacherEntity teacher = new TeacherEntity()
+                .setEmail(addTeacherDTO.getEmail())
                 .setFirstName(addTeacherDTO.getFirstName())
                 .setLastName(addTeacherDTO.getFirstName())
                 .setFaculty(faculty)
-                .setRoom(addTeacherDTO.getRoom());
+                .setRoom(addTeacherDTO.getRoom())
+                .setUser(userEntity);
 
         teacherRepository.save(teacher);
     }

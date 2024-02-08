@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class FileDownloadController {
 
-    private static final String UPLOAD_DIR = "/home/vas1lb/projects/university-system/university-project/uploads";
+    private static final String UPLOAD_DIR = "C:\\Users\\VAS1LB\\OneDrive - Bosch Group\\Desktop\\projects\\university-system\\university-project\\uploads";
 
     @GetMapping("/files")
     public String listFiles(Model model) {

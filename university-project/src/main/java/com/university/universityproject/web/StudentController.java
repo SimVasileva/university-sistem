@@ -1,9 +1,11 @@
 package com.university.universityproject.web;
 
+import com.university.universityproject.model.GradeEntity;
 import com.university.universityproject.model.StudentEntity;
 import com.university.universityproject.model.SubjectEntity;
 import com.university.universityproject.model.UserEntity;
 import com.university.universityproject.model.dto.AddStudentDTO;
+import com.university.universityproject.repository.GradeRepository;
 import com.university.universityproject.repository.StudentRepository;
 import com.university.universityproject.repository.SubjectRepository;
 import com.university.universityproject.repository.UserRepository;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -32,13 +35,16 @@ public class StudentController {
     private final SubjectRepository subjectRepository;
     private static final String STUDENT = "student";
     private static final String SUBJECTS = "subjects";
+    private final GradeRepository gradeRepository;
 
     public StudentController(StudentService studentService, StudentRepository studentRepository, UserRepository userRepository,
-                             SubjectRepository subjectRepository) {
+                             SubjectRepository subjectRepository,
+                             GradeRepository gradeRepository) {
         this.studentService = studentService;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
         this.subjectRepository = subjectRepository;
+        this.gradeRepository = gradeRepository;
     }
 
     @GetMapping("/add")
@@ -49,54 +55,67 @@ public class StudentController {
     @PostMapping("/add")
     public String addStudent(AddStudentDTO studentDTO) {
         studentService.createStudent(studentDTO);
-        return "redirect:/";
+        return "redirect:/students/add";
     }
 
     @GetMapping("/grades")
-    public String getGrades(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Get the username
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
-        model.addAttribute(STUDENT, user);
+    public String getGrades(Model model, Principal principal) {
+        try {
+            String email = principal.getName(); // Get the username
+            UserEntity user = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
+            model.addAttribute(STUDENT, user);
+            StudentEntity student = studentRepository.findByUserId(user.getId());
+            if (student != null) {
+                List<GradeEntity> gradeList = gradeRepository.findAllByStudentId(student.getId());
+                model.addAttribute("grades", gradeList);
+            } else {
+                // Handle the case where student is null
+                model.addAttribute("error", "Student not found for user: " + email);
+            }
+        } catch (Exception e) {
+            // Log and handle exceptions
+            model.addAttribute("error", "An error occurred while retrieving grades.");
+        }
         return "student-grades";
-    }
-
-    @PostMapping("/grades")
-    public String viewGrades(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Get the username
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
-
-        StudentEntity student = studentRepository.findByUser(user);
-        List<SubjectEntity> subjectList = subjectRepository.findAllByStudentId(student.getId());
-
-        model.addAttribute(SUBJECTS, subjectList);
-
-        return "student-grades";
-
     }
 
     @GetMapping("/subjects")
-    public String getSubjects(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Get the username
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
-        model.addAttribute(STUDENT, user);
+    public String getSubjects(Model model,Principal principal) {
+        try {
+            String email = principal.getName(); // Get the username
+            UserEntity user = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
+            model.addAttribute(STUDENT, user);
+            StudentEntity student = studentRepository.findByUserId(user.getId());
+            if (student != null) {
+                List<SubjectEntity> subjectList = subjectRepository.findAll();
+                model.addAttribute(SUBJECTS, subjectList);
+            } else {
+                // Handle the case where student is null
+                model.addAttribute("error", "Student not found for user: " + email);
+            }
+        } catch (Exception e) {
+            // Log and handle exceptions
+            model.addAttribute("error", "An error occurred while retrieving grades.");
+        }
         return SUBJECTS;
     }
 
-    @PostMapping("/subjects")
-    public String viewSubjects(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Get the username
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
-        StudentEntity student = studentRepository.findByUser(user);
-        model.addAttribute(STUDENT, student);
-
-        List<SubjectEntity> subjectSet = subjectRepository.findAllByStudentId(student.getId());
-        model.addAttribute(SUBJECTS, subjectSet);
-        return SUBJECTS;
-    }
+//    @PostMapping("/subjects")
+//    public String viewSubjects(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String email = authentication.getName(); // Get the username
+//        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
+//
+//        StudentEntity student = studentRepository.findByUserId(user.getId());
+//        model.addAttribute(STUDENT, student);
+//
+//        List<SubjectEntity> subjectList = subjectRepository.findAll();
+//
+//        model.addAttribute(SUBJECTS, subjectList);
+//        return SUBJECTS;
+//    }
 //    @GetMapping
 //    public String getStudent(@ModelAttribute("searchForm") SearchForm searchForm) {
 //        return "students";

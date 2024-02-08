@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface GradeRepository extends JpaRepository<GradeEntity, Long> {
     GradeEntity getByGrade(Integer grade);
-    List<GradeEntity> findByStudent(StudentEntity student);
+    List<GradeEntity> findAllByStudentId(Long id);
+
+
 }

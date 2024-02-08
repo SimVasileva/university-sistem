@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en"
-        xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <title>Home</title>
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
 <header>
-<nav th:replace="~{/fragments/header}"></nav>
+    <nav th:replace="~{/fragments/header}"></nav>
 </header>
 
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <h1>Welcome, <span th:text="${user.firstName + ' ' + user.lastName}"></span>!</h1>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <h1>Welcome, <span th:text="${user.firstName + ' ' + user.lastName}"></span>!</h1>
+        </div>
+        <div class="user-info">
+            <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+
+            <div sec:authorize="hasAnyRole('STUDENT')">
+                <p><strong>Faculty:</strong> <span th:if="${student != null}" th:text="${student.faculty.name}"></span></p>
+                <p><strong>Speciality:</strong> <span th:if="${student != null}" th:text="${student.speciality.name}"></span></p>
+                <p><strong>Faculty Number:</strong> <span th:if="${student != null}" th:text="${student.facultyNumber}"></span></p>
+                <p><strong>Group:</strong> <span th:if="${student != null}" th:text="${student.grupa}"></span></p>
             </div>
-            <div class="user-info">
-                <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
-                <p><strong>Faculty:</strong> <span>Faculty of Telecommunications</span></p>
-                <p><strong>Speciality:</strong> <span>Telecommunications</span></p>
-                <p><strong>Faculty Number:</strong> <span>111219041</span></p>
-                <p><strong>Group:</strong> <span>49</span></p>
+            <div sec:authorize="hasAnyRole('TEACHER')">
+                <p><strong>Faculty:</strong> <span th:if="${teacher != null}" th:text="${teacher.faculty.name}"></span></p>
+                <p><strong>Room:</strong> <span th:if="${teacher != null}" th:text="${teacher.room}"></span></p>
             </div>
         </div>
     </div>
-    </body>
+</div>
+</body>
 </html>

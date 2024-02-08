@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Subjects</title>
-      <link rel="stylesheet" href="/css/view-grades.css">
+    <link rel="stylesheet" href="/css/view-grades.css">
 </head>
 <body>
 <header>
@@ -11,22 +11,16 @@
 </header>
 <h1>Subjects for <span th:text="${student.firstName + ' ' + student.lastName}"></span></h1>
 
-<table th:action="@{/students/subjects}" th:method="post">
-    <thead>
+<table th:action="@{/students/subjects}">
     <tr>
         <th>Subject</th>
         <th>Passed</th>
     </tr>
-    </thead>
-    <tbody>
     <tr th:each="subject : ${subjects}">
         <td th:text="${subject.name}"></td>
+        <td><span id="pass" th:if="${subject.passed}">&#10003;</span>
+            <span id="fail" th:unless="${subject.passed}">&#10007;</span></td>
     </tr>
-    <tr th:each="subject : ${subjects}">
-        <td><span th:if="${subject.passed}">&#10003;</span>
-            <span th:unless="${subject.passed}">&#10007;</span></td>
-    </tr>
-    </tbody>
 </table>
 </body>
 </html>

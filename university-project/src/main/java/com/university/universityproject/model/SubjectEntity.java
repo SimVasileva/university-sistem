@@ -1,13 +1,6 @@
 package com.university.universityproject.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -24,13 +17,7 @@ public class SubjectEntity {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private StudentEntity student;
-    @ManyToOne
-    private GradeEntity grade;
 
-    public SubjectEntity setGrade(GradeEntity grade) {
-        this.grade = grade;
-        return this;
-    }
 
     public SubjectEntity setStudent(StudentEntity student) {
         this.student = student;
@@ -47,8 +34,8 @@ public class SubjectEntity {
         return this;
     }
 
-  public SubjectEntity setPassed(boolean passed){
-        this.passed=passed;
+    public SubjectEntity setPassed(boolean passed) {
+        this.passed = passed;
         return this;
-  }
+    }
 }

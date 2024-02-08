@@ -38,7 +38,7 @@ public class TeacherController {
     @PostMapping("/add")
     public String addTeacher(AddTeacherDTO teacherDTO) {
         teacherService.createTeacher(teacherDTO);
-        return "redirect:/home";
+        return "redirect:/teachers/add";
     }
 
     @GetMapping
@@ -69,7 +69,7 @@ public class TeacherController {
 
         gradeService.createGrade(facultyNumber, subject, grade);
 
-        return "redirect:/home";
+        return "redirect:/teachers/grade";
     }
 
     @GetMapping("/subject")
@@ -84,7 +84,7 @@ public class TeacherController {
             @RequestParam(name = "passed") boolean passed) {
 
         subjectService.createSubject(facultyNumber, subject, passed);
-        return "redirect:/home";
+        return "redirect:/teachers/subject";
     }
 
 }

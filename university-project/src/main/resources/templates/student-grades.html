@@ -11,21 +11,15 @@
   <nav th:replace="~{/fragments/header}"></nav>
 </header>
 <h1>Grades for <span th:text="${student.firstName + ' ' + student.lastName}"></span></h1>
-<table th:action="@{/students/grades}" th:method="post">
-  <thead>
+<table th:action="@{/students/grades}">
   <tr>
     <th>Subject</th>
     <th>Grade</th>
   </tr>
-  </thead>
-  <tbody>
-  <tr th:each="subject : ${subjects}">
-    <td th:text="${subject.name}"></td>
+  <tr th:each="grade : ${grades}">
+    <td  th:text="${grade.getSubject().getName()}"></td>
+    <td th:each="grade : ${grades}" th:text="${grade.grade}"></td>
   </tr>
-  <tr th:each="subject : ${subjects}">
-    <td th:text="${subject.grade.grade}"></td>
-  </tr>
-  </tbody>
 </table>
 
 </body>

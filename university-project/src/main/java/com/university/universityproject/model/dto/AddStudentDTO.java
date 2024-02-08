@@ -11,7 +11,7 @@ public class AddStudentDTO {
     private String facultyNumber;
     private String faculty;
     private String speciality;
-    private String group;
+    private String grupa;
 
     public AddStudentDTO setFirstName(String firstName) {
         this.firstName = firstName;
@@ -48,8 +48,8 @@ public class AddStudentDTO {
         return this;
     }
 
-    public AddStudentDTO setGroup(String group) {
-        this.group = group;
+    public AddStudentDTO setGrupa(String grupa) {
+        this.grupa = grupa;
         return this;
     }
 }

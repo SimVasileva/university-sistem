@@ -7,10 +7,8 @@ import com.university.universityproject.repository.GradeRepository;
 import com.university.universityproject.repository.StudentRepository;
 import com.university.universityproject.repository.SubjectRepository;
 import com.university.universityproject.service.GradeService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class GradeServiceImpl implements GradeService {
@@ -27,20 +25,24 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public void createGrade(String facultyNumber, String subject, Integer grade) {
-        Optional<StudentEntity> studentOpt = studentRepository.findByFacultyNumber(facultyNumber);
-        if (studentOpt.isPresent()) {
-            StudentEntity student = studentOpt.get();
-            Optional<SubjectEntity> subjectOpt = subjectRepository.findByNameAndStudentId(subject, student.getId());
+        StudentEntity student = studentRepository.findByFacultyNumber(facultyNumber);
 
-            SubjectEntity subjectEntity = subjectOpt.get();
-            GradeEntity gradeEntity = new GradeEntity().setGrade(grade).setStudent(student).setSubject(subjectEntity);
-            subjectEntity.setGrade(gradeEntity);
+        SubjectEntity subjectEntity = subjectRepository.findByName(subject);
 
-            subjectRepository.save(subjectEntity);
-            gradeRepository.save(gradeEntity);
-        } else {
-            throw new UsernameNotFoundException("Not found " + facultyNumber);
+        if (subjectEntity == null) {
+            subjectEntity = new SubjectEntity()
+                    .setStudent(student)
+                    .setName(subject)
+                    .setPassed(true);
+            student.setSubject(subjectEntity);
         }
+        GradeEntity gradeEntity = new GradeEntity()
+                .setGrade(grade)
+                .setStudent(student)
+                .setSubject(subjectEntity);
+
+        gradeRepository.save(gradeEntity);
+        subjectRepository.save(subjectEntity);
     }
 
 }

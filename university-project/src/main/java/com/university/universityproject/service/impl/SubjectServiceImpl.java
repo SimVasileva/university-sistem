@@ -24,14 +24,15 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public void createSubject(String facultyNumber, String subject, boolean passed) {
-        Optional<StudentEntity> studentOpt = studentRepository.findByFacultyNumber(facultyNumber);
+        StudentEntity student = studentRepository.findByFacultyNumber(facultyNumber);
 
-        if (studentOpt.isPresent()) {
-            StudentEntity student = studentOpt.get();
-            SubjectEntity subjectEntity = new SubjectEntity().setName(subject).setPassed(passed).setStudent(student);
+        if (student != null) {
+            SubjectEntity subjectEntity = new SubjectEntity()
+                    .setName(subject)
+                    .setPassed(passed)
+                    .setStudent(student);
+
             subjectRepository.save(subjectEntity);
-        } else {
-            throw new UsernameNotFoundException("Not found " + facultyNumber);
         }
     }
 }

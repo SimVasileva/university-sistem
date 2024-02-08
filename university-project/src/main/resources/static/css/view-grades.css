@@ -32,11 +32,4 @@ td {
 tr:hover {
     background-color: #ddd; /* Gray on hover */
 }
-table td span::before {
-    content: "\2713"; /* Tick icon */
-    color: green;
-}
-table td span:empty::before {
-    content: "\2717"; /* Cross icon for empty spans */
-    color: red;
-}
+
